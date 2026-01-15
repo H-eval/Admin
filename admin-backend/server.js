@@ -49,8 +49,12 @@ const generateOtp = () => Math.floor(100000 + Math.random() * 900000).toString()
 // 1️⃣ Request OTP
 app.post("/api/admin/request-otp", async (req, res) => {
   try {
-    const { email } = req.body;
-    if (!allowedEmails.includes(email)) {
+    let { email } = req.body;
+     email = email.trim().toLowerCase();   // ✅ YAHI ADD KARO
+    console.log("EMAIL RECEIVED:", JSON.stringify(email));
+console.log("ALLOWED EMAILS:", allowedEmails);
+
+     if (!allowedEmails.includes(email)) {
       return res.status(403).json({ error: "Email not allowed" });
     }
 
@@ -81,7 +85,8 @@ app.post("/api/admin/request-otp", async (req, res) => {
 // 2️⃣ Verify OTP
 app.post("/api/admin/verify-otp", async (req, res) => {
   try {
-    const { email, otp } = req.body;
+    let { email, otp } = req.body;
+    email = email.trim().toLowerCase();   // ✅ YAHI ADD KARO
     const record = await Otp.findOne({ email });
     if (!record) return res.status(400).json({ error: "No OTP found" });
 
