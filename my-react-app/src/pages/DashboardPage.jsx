@@ -31,20 +31,20 @@ const defaultStatsCardsData = [
     bgColor: "bg-purple-500/10",
     shadow: "shadow-[0_0_15px_rgba(192,132,252,0.3)]",
   },
-  {
-    title: "Clientele",
-    value: "120",
-    color: "text-blue-400",
-    bgColor: "bg-blue-500/10",
-    shadow: "shadow-[0_0_15px_rgba(96,165,250,0.3)]",
-  },
-  {
-    title: "Total Revenue",
-    value: "$11,500",
-    color: "text-yellow-400",
-    bgColor: "bg-yellow-500/10",
-    shadow: "shadow-[0_0_15px_rgba(250,204,21,0.3)]",
-  },
+  // {
+  //   title: "Clientele",
+  //   value: "120",
+  //   color: "text-blue-400",
+  //   bgColor: "bg-blue-500/10",
+  //   shadow: "shadow-[0_0_15px_rgba(96,165,250,0.3)]",
+  // },
+  // {
+  //   title: "Total Revenue",
+  //   value: "$11,500",
+  //   color: "text-yellow-400",
+  //   bgColor: "bg-yellow-500/10",
+  //   shadow: "shadow-[0_0_15px_rgba(250,204,21,0.3)]",
+  // },
 ];
 
 const PIE_COLORS = ["#34D399", "#C084FC", "#60A5FA"];
@@ -245,7 +245,7 @@ export const DashboardPage = () => {
         {/* Product Overview */}
         <Card>
           <CardHeader>
-            <CardTitle>Product Overview</CardTitle>
+            <CardTitle>System Status</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-[250px]">

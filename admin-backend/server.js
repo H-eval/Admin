@@ -47,7 +47,7 @@ const OTP_EXPIRY = process.env.OTP_EXPIRY_MINUTES || 10;
 const generateOtp = () => Math.floor(100000 + Math.random() * 900000).toString();
 
 // 1️⃣ Request OTP
-app.post("/admin/request-otp", async (req, res) => {
+app.post("/api/admin/request-otp", async (req, res) => {
   try {
     const { email } = req.body;
     if (!allowedEmails.includes(email)) {
@@ -79,7 +79,7 @@ app.post("/admin/request-otp", async (req, res) => {
 });
 
 // 2️⃣ Verify OTP
-app.post("/admin/verify-otp", async (req, res) => {
+app.post("/api/admin/verify-otp", async (req, res) => {
   try {
     const { email, otp } = req.body;
     const record = await Otp.findOne({ email });
