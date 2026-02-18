@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../api/axiosConfig";  
 
 // --- Mock Data (fallbacks) ---
+
 const defaultStatsCardsData = [
   {
     title: "Sales Overview",
@@ -31,20 +32,20 @@ const defaultStatsCardsData = [
     bgColor: "bg-purple-500/10",
     shadow: "shadow-[0_0_15px_rgba(192,132,252,0.3)]",
   },
-  {
-    title: "Clientele",
-    value: "120",
-    color: "text-blue-400",
-    bgColor: "bg-blue-500/10",
-    shadow: "shadow-[0_0_15px_rgba(96,165,250,0.3)]",
-  },
-  {
-    title: "Total Revenue",
-    value: "$11,500",
-    color: "text-yellow-400",
-    bgColor: "bg-yellow-500/10",
-    shadow: "shadow-[0_0_15px_rgba(250,204,21,0.3)]",
-  },
+  // {
+  //   title: "Clientele",
+  //   value: "120",
+  //   color: "text-blue-400",
+  //   bgColor: "bg-blue-500/10",
+  //   shadow: "shadow-[0_0_15px_rgba(96,165,250,0.3)]",
+  // },
+  // {
+  //   title: "Total Revenue",
+  //   value: "$11,500",
+  //   color: "text-yellow-400",
+  //   bgColor: "bg-yellow-500/10",
+  //   shadow: "shadow-[0_0_15px_rgba(250,204,21,0.3)]",
+  // },
 ];
 
 const PIE_COLORS = ["#34D399", "#C084FC", "#60A5FA"];
@@ -71,23 +72,25 @@ const CardContent = ({ children, className = "" }) => (
   <div className={`p-6 pt-0 ${className}`}>{children}</div>
 );
 
-const Badge = ({ children, variant = "default" }) => {
+const Badge = ({ children, variant = "default", onClick, className = "" }) => {
   const colors = {
     green: "bg-green-500/10 text-green-400 border border-green-500/30",
     yellow: "bg-yellow-500/10 text-yellow-400 border border-yellow-500/30",
     red: "bg-red-500/10 text-red-400 border border-red-500/30",
     default: "bg-gray-700 text-gray-200",
   };
+ 
+
   return (
     <span
-      className={`rounded-full px-3 py-1 text-xs font-semibold ${colors[variant]}`}
-    >
-      {children}
-    </span>
+  onClick={onClick}
+  className={`rounded-full px-3 py-1 text-xs font-semibold ${colors[variant]} ${className}`}
+>
+  {children}
+</span>
+
   );
 };
-
-
 
 // --- Dashboard Logic + UI ---
 export const DashboardPage = () => {
@@ -100,6 +103,40 @@ export const DashboardPage = () => {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("users");
   const navigate = useNavigate();
+
+  const handleDelete = async (id) => {
+  const confirmDelete = window.confirm(
+    "Are you sure you want to delete this permanently?"
+  );
+
+  if (!confirmDelete) return;
+
+  try {
+    const token = localStorage.getItem("token");
+
+    // Decide API based on active tab
+    const url =
+      activeTab === "users"
+        ? `/users/delete-user/${id}`
+        : `/admin/delete-admin/${id}`;
+
+    await api.delete(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    alert("Deleted successfully ✅");
+
+    // 🔄 Refresh dashboard data
+    fetchDashboardData();
+  } catch (error) {
+    console.error("Delete failed:", error);
+    alert("Failed to delete. Please try again.");
+  }
+};
+
+
 
   // ✅ Fetch dashboard data with token
   const fetchDashboardData = useCallback(async () => {
@@ -245,7 +282,7 @@ export const DashboardPage = () => {
         {/* Product Overview */}
         <Card>
           <CardHeader>
-            <CardTitle>Product Overview</CardTitle>
+            <CardTitle>System Status</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-[250px]">
@@ -332,10 +369,12 @@ export const DashboardPage = () => {
       <table className="w-full text-left">
         <thead className="border-b border-gray-800">
           <tr className="text-xs text-gray-400 uppercase">
-            <th className="p-4 font-medium">Name</th>
-            <th className="p-4 font-medium">Email</th>
-            <th className="p-4 font-medium">Language</th>
-            <th className="p-4 font-medium">Registered</th>
+            <th className="p-5 font-medium">Name</th>
+            <th className="p-5 font-medium">Email</th>
+            <th className="p-5 font-medium">Language</th>
+            <th className="p-5 font-medium">Registered</th>
+            <th className="p-5 font-medium text-center">Action</th>
+
           </tr>
         </thead>
 
@@ -366,6 +405,20 @@ export const DashboardPage = () => {
                         : "—"}
                     </Badge>
                   </td>
+                  
+                <td className="p-5">
+  <div className="flex justify-center">
+    <Badge
+      variant="red"
+      className="cursor-pointer hover:opacity-80"
+      onClick={() => handleDelete(person._id)}
+    >
+      Delete
+    </Badge>
+  </div>
+</td>
+
+
                 </motion.tr>
               )
             )

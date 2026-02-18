@@ -15,6 +15,8 @@ import { Menu, ShoppingBag } from "lucide-react";
 import Otp from "./pages/otp";
 import  AddUserPage from "./pages/addUser";
 import SubAdminPage  from "./pages/addAdmin";
+import HomePage from "./pages/HomePage";
+import AboutPage from "./pages/AboutPage";
 
 
 // ✅ Wrapper for Router so useNavigate works
@@ -59,13 +61,14 @@ const App = () => {
 
 // ✅ Your original dashboard UI (no change)
 const AdminLayout = () => {
-  const [currentPage, setCurrentPage] = useState("Dashboard");
+  const [currentPage, setCurrentPage] = useState("Home");
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const renderPage = () => {
     switch (currentPage) {
       case "Home":
-        return <PlaceholderPage title="Home" />;
+        return <HomePage setCurrentPage={setCurrentPage} />;
       case "Dashboard":
         return <DashboardPage />;
       case "Add User":
@@ -73,7 +76,8 @@ const AdminLayout = () => {
       case "Add Subadmin":
         return  <SubAdminPage />;
       case "About":
-        return <PlaceholderPage title="About" />;
+  return <AboutPage />;
+
       case "Logout":
         localStorage.removeItem("token");
         window.location.href = "/otp";

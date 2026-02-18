@@ -80,21 +80,27 @@ const SubAdminPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center p-4 sm:p-6 lg:p-8">
-      <div
+   <div className="min-h-screen bg-gray-950 text-white px-6 sm:px-10 lg:px-20 py-12">
+
+      {/* <div
         className={`w-full max-w-4xl bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl shadow-2xl p-6 sm:p-8 transition-all duration-700 ${
           visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
-      >
-        <h1 className="text-3xl sm:text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-green-800 to-green-400 mb-2">
-          Create New Subadmin
-        </h1>
-        <p className="text-center text-gray-400 mb-8">
-          Please fill in the details to create a new subadmin.
-        </p>
+      > */}
+        <h1 className="text-4xl md:text-5xl font-bold text-green-400 mb-3">
+  Create New Subadmin
+</h1>
+
+<p className="text-gray-400 max-w-2xl mb-12">
+  Add a trusted user as a subadmin with controlled access to system features.
+</p>
+
+<hr className="border-gray-800 mb-12" />
+
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
             {/* First Name */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-1">
@@ -268,9 +274,10 @@ const SubAdminPage = () => {
               )}
             </button>
           </div>
-        </form>
-      </div>
-    </div>
+       <form onSubmit={handleSubmit} className="space-y-14">
+
+     </form></form> </div>
+    //</div>
   );
 };
 

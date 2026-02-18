@@ -1,6 +1,23 @@
  import bcrypt from "bcryptjs";
-import Admin from "../models/Admin.js";
 import User from "../models/user.js";
+import Admin from "../models/Admin.js";
+
+export const getHomeStats = async (req, res) => {
+  try {
+    const totalUsers = await User.countDocuments();
+    const totalSubadmins = await Admin.countDocuments({
+      isSuperAdmin: false
+    });
+
+    res.status(200).json({
+      totalUsers,
+      totalSubadmins,
+    });
+  } catch (error) {
+    console.error("Error fetching home stats:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
 
  // 🟢 Add new admin (or sub-admin)
 export const addAdmin = async (req, res) => {
@@ -84,6 +101,7 @@ export const addUser = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
 
 // 🟢 Dashboard summary (users + admins)
 // 🟢 Dashboard summary (users + admins)

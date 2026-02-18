@@ -93,14 +93,22 @@ const AddUserPage = () => {
 
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center p-4 sm:p-6 lg:p-8">
-      <div 
-        className={`w-full max-w-4xl bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl shadow-2xl p-6 sm:p-8 transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-      >
-        <h1 className="text-3xl sm:text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-green-800 to-green-400 mb-2">
-          Create New User Account
-        </h1>
-        <p className="text-center text-gray-400 mb-8">Please fill in the details to create a new user.</p>
+   <div className="min-h-screen bg-gray-950 text-white px-6 sm:px-10 lg:px-20 py-12">
+
+     
+        {/* Page Header */}
+<div className="w-full max-w-4xl mx-auto mb-10">
+
+  <h1 className="text-4xl sm:text-5xl text-center font-bold text-green-400">
+  Create New User
+</h1>
+
+<p className="text-gray-400 mt-2 text-center">
+  Fill in the details below to register a new user into the system.
+</p>
+
+</div>
+
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -298,9 +306,16 @@ const AddUserPage = () => {
               )}
             </button>
           </div>
+         <form
+  onSubmit={handleSubmit}
+  className="space-y-8 w-full max-w-4xl mx-auto"
+>
+
+
+        </form>
         </form>
       </div>
-    </div>
+    
   );
 };
 
