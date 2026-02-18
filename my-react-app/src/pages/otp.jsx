@@ -415,7 +415,11 @@ export default function Otp() {
     setError("");
 
     try {
+<<<<<<< HEAD
       const res = await fetch("http://localhost:7000/api/admin/request-otp", {
+=======
+      const res = await fetch("http://localhost:5000/api/admin/request-otp", {
+>>>>>>> ba2601b06aa4516bc3e3d6550b3b2ac18c4aad86
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -492,7 +496,11 @@ export default function Otp() {
     setError("");
 
     try {
+<<<<<<< HEAD
       const res = await fetch("http://localhost:7000/api/admin/verify-otp", {
+=======
+      const res = await fetch("http://localhost:5000/api/admin/verify-otp", {
+>>>>>>> ba2601b06aa4516bc3e3d6550b3b2ac18c4aad86
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp: otpValue }),
