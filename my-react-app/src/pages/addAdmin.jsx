@@ -1,4 +1,5 @@
- import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import api from "../api/axiosConfig";
 
 const EyeIcon = () => (
@@ -31,6 +32,7 @@ const SubAdminPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [visible, setVisible] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => setVisible(true), []);
 
@@ -82,12 +84,20 @@ const SubAdminPage = () => {
   return (
    <div className="min-h-screen bg-gray-950 text-white px-6 sm:px-10 lg:px-20 py-12">
 
+     {/* 🔥 BACK BUTTON */}
+  <button
+    onClick={() => navigate("/home")}
+    className="mb-6 px-4 py-2 rounded-lg bg-purple-500 hover:bg-purple-400/30 text-white"
+  >
+    ← Back to Home
+  </button>
+
       {/* <div
         className={`w-full max-w-4xl bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl shadow-2xl p-6 sm:p-8 transition-all duration-700 ${
           visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
       > */}
-        <h1 className="text-4xl md:text-5xl font-bold text-green-400 mb-3">
+        <h1 className="text-4xl md:text-5xl font-bold text-purple-400 mb-3">
   Create New Subadmin
 </h1>
 
@@ -104,7 +114,7 @@ const SubAdminPage = () => {
             {/* First Name */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-1">
-                First Name <span className="text-green-400">*</span>
+                First Name <span className="text-purple-400">*</span>
               </label>
               <input
                 type="text"
@@ -135,7 +145,7 @@ const SubAdminPage = () => {
             {/* Last Name */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-1">
-                Last Name <span className="text-green-400">*</span>
+                Last Name <span className="text-purple-400">*</span>
               </label>
               <input
                 type="text"
@@ -153,7 +163,7 @@ const SubAdminPage = () => {
             {/* Email */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-1">
-                Email Address <span className="text-green-400">*</span>
+                Email Address <span className="text-purple-400">*</span>
               </label>
               <input
                 type="email"
@@ -187,7 +197,7 @@ const SubAdminPage = () => {
             {/* User ID */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-1">
-                User ID <span className="text-green-400">*</span>
+                User ID <span className="text-purple-400">*</span>
               </label>
               <input
                 type="text"
@@ -203,7 +213,7 @@ const SubAdminPage = () => {
             {/* Password */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-1">
-                Password <span className="text-green-400">*</span>
+                Password <span className="text-purple-400">*</span>
               </label>
               <div className="relative">
                 <input
@@ -265,7 +275,7 @@ const SubAdminPage = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-md font-bold text-white bg-gradient-to-r from-green-700 to-green-400 hover:from-green-600 hover:to-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 focus:ring-offset-gray-900 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-md font-bold text-white bg-gradient-to-r from-purple-700 to-purple-400 hover:from-purple-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 focus:ring-offset-gray-900 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? (
                 <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>

@@ -206,3 +206,19 @@
     height: 250px;
   }
 }
+
+
+
+.floating-word {
+  position: fixed;
+  color: rgba(255, 255, 255, 0.05);
+  animation: float linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}

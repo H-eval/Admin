@@ -8,18 +8,14 @@
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.12.2",
-<<<<<<< HEAD
+    "chart.js": "^4.5.1",
     "framer-motion": "^12.28.1",
-=======
-    "cors": "^2.8.5",
-    "framer-motion": "^12.23.24",
->>>>>>> ba2601b06aa4516bc3e3d6550b3b2ac18c4aad86
     "lucide-react": "^0.548.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.9.4",
     "react-scripts": "5.0.1",
-    "recharts": "^3.3.0",
+    "recharts": "^3.8.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

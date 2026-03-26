@@ -1,4 +1,5 @@
- import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
  import { Globe } from "lucide-react";
  import api from "../api/axiosConfig";  
 
@@ -37,7 +38,7 @@ const AddUserPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showLanguageList, setShowLanguageList] = useState(false);
 
-
+const navigate = useNavigate();
   // A simple fade-in animation effect for the form on mount
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -94,12 +95,19 @@ const AddUserPage = () => {
 
   return (
    <div className="min-h-screen bg-gray-950 text-white px-6 sm:px-10 lg:px-20 py-12">
+<button
+    onClick={() => navigate("/home")}
+    className="mb-6 px-4 py-2 rounded-lg bg-blue-400 hover:bg-blue-600 text-white"
+  >
+    ← Back to Home
+  </button>
+
 
      
         {/* Page Header */}
 <div className="w-full max-w-4xl mx-auto mb-10">
 
-  <h1 className="text-4xl sm:text-5xl text-center font-bold text-green-400">
+  <h1 className="text-4xl sm:text-5xl text-center font-bold text-blue-400">
   Create New User
 </h1>
 
@@ -114,7 +122,7 @@ const AddUserPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* First Name */}
             <div>
-              <label htmlFor="firstName" className="block text-sm font-medium text-gray-300 mb-1">First Name <span className="text-green-400">*</span></label>
+              <label htmlFor="firstName" className="block text-sm font-medium text-gray-300 mb-1">First Name <span className="text-blue-400">*</span></label>
               <input type="text" name="firstName" id="firstName" value={formData.firstName} onChange={handleChange} required className="form-input" placeholder="e.g., John" />
             </div>
 
@@ -126,7 +134,7 @@ const AddUserPage = () => {
 
             {/* Last Name */}
             <div>
-              <label htmlFor="lastName" className="block text-sm font-medium text-gray-300 mb-1">Last Name <span className="text-green-400">*</span></label>
+              <label htmlFor="lastName" className="block text-sm font-medium text-gray-300 mb-1">Last Name <span className="text-blue-400">*</span></label>
               <input type="text" name="lastName" id="lastName" value={formData.lastName} onChange={handleChange} required className="form-input" placeholder="e.g., Doe" />
             </div>
           </div>
@@ -134,13 +142,13 @@ const AddUserPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">Email Address <span className="text-green-400">*</span></label>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">Email Address <span className="text-blue-400">*</span></label>
               <input type="email" name="email" id="email" value={formData.email} onChange={handleChange} required className="form-input" placeholder="user@example.com" />
             </div>
 
             {/* Phone Number */}
             <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">Phone Number <span className="text-green-400">*</span></label>
+              <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">Phone Number <span className="text-blue-400">*</span></label>
               <div className="flex">
                 <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-600 bg-gray-700 text-gray-400 text-sm">
                   +91
@@ -153,14 +161,14 @@ const AddUserPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* User ID */}
             <div>
-              <label htmlFor="userId" className="block text-sm font-medium text-gray-300 mb-1">User ID <span className="text-green-400">*</span></label>
+              <label htmlFor="userId" className="block text-sm font-medium text-gray-300 mb-1">User ID <span className="text-blue-400">*</span></label>
               <input type="text" name="userId" id="userId" value={formData.userId} onChange={handleChange} required className="form-input" placeholder="e.g., john.doe_123" />
             </div>
             
              {/* Password */}
               <div>
                 <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-1">
-                  Password <span className="text-green-400">*</span>
+                  Password <span className="text-blue-400">*</span>
                 </label>
                 <div className="relative">
                   <input
@@ -232,7 +240,7 @@ const AddUserPage = () => {
                 }));
               }
             }}
-            className="text-green-400 bg-gray-700 border-gray-600 rounded focus:ring-green-500"
+            className="text-blue-400 bg-gray-700 border-gray-600 rounded focus:ring-green-500"
           />
           <span>{lang}</span>
         </label>
@@ -246,7 +254,7 @@ const AddUserPage = () => {
       {formData.languages.map((lang) => (
         <span
           key={lang}
-          className="flex items-center bg-green-600/50 text-green-200 rounded-full px-3 py-1 text-sm"
+          className="flex items-center bg-blue-600/50 text-blue-200 rounded-full px-3 py-1 text-sm"
         >
           {lang}
           <button
@@ -257,7 +265,7 @@ const AddUserPage = () => {
                 languages: prev.languages.filter(l => l !== lang),
               }))
             }
-            className="ml-2 text-green-200 hover:text-white"
+            className="ml-2 text-blue-200 hover:text-white"
           >
             &times;
           </button>
@@ -271,7 +279,7 @@ const AddUserPage = () => {
             {/* Education Info */}
             <div className="md:col-span-1">
                 <label htmlFor="education" className="block text-sm font-medium text-gray-300 mb-1">Highest Education</label>
-                <input type="text" name="education" id="education" value={formData.education} onChange={handleChange} className="form-input" placeholder="e.g., B.Tech in CSE" />
+                <input type="text" name="education" id="education" value={formData.education} onChange={handleChange} className="form-input" placeholder="e.g., Li" />
             </div>
             {/* Gender */}
             <div className="md:col-span-1">
@@ -297,7 +305,7 @@ const AddUserPage = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-md font-bold text-white bg-gradient-to-r from-green-700 to-green-400 hover:from-green-600 hover:to-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 focus:ring-offset-gray-900 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-md font-bold text-white bg-gradient-to-r from-blue-700 to-blue-400 hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:ring-offset-gray-900 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? (
                 <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
@@ -306,13 +314,13 @@ const AddUserPage = () => {
               )}
             </button>
           </div>
+          </form>
          <form
   onSubmit={handleSubmit}
   className="space-y-8 w-full max-w-4xl mx-auto"
 >
 
-
-        </form>
+        
         </form>
       </div>
     

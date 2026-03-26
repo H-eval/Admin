@@ -20,3 +20,22 @@ code {
     @apply w-full bg-gray-900/50 border border-gray-600 rounded-md shadow-sm p-2.5 text-white placeholder-gray-500 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 outline-none;
   }
 }
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(139,92,246,0.4); }
+  50% { box-shadow: 0 0 30px rgba(139,92,246,0.6); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.btn-futuristic {
+  animation: glow-pulse 3s ease-in-out infinite, float 4s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+html, body, #root {
+  height: 100%;
+  overflow-y: auto;
+}

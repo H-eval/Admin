@@ -187,8 +187,8 @@ body {
 }
 
 .success-icon {
-  background: linear-gradient(135deg, #00ff88 0%, #00cc66 100%);
-  box-shadow: 0 8px 24px rgba(0, 255, 136, 0.3);
+  background: linear-gradient(135deg, #0077ff 0%, #003dcc 100%);
+  box-shadow: 0 8px 24px rgba(0, 149, 255, 0.3);
 }
 
 /* Typography */
@@ -315,7 +315,7 @@ input[type="email"]:disabled {
 .btn-primary {
   background: linear-gradient(135deg, #00bfff 0%, #0080ff 100%);
   color: white;
-  box-shadow: 0 8px 24px rgba(0, 191, 255, 0.3);
+  box-shadow: 0 8px 24px rgba(60, 172, 209, 0.3);
 }
 
 .btn-primary:hover:not(:disabled) {
@@ -333,9 +333,9 @@ input[type="email"]:disabled {
 }
 
 .btn-success {
-  background: linear-gradient(135deg, #00ff88 0%, #00cc66 100%);
+  background: linear-gradient(135deg, #343ead 0%, #0066cc 100%);
   color: white;
-  box-shadow: 0 8px 24px rgba(0, 255, 136, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 76, 255, 0.3);
 }
 
 .back-btn {

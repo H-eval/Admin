@@ -167,6 +167,40 @@ export const DashboardPage = () => {
     }
   }, [navigate]);
 
+  const getLast7DaysGrowth = () => {
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  const last7Days = [];
+
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+
+    const dayName = days[d.getDay()];
+
+    const usersCount = data.users.filter((u) => {
+      if (!u.registrationDate) return false;
+      const date = new Date(u.registrationDate);
+      return date.toDateString() === d.toDateString();
+    }).length;
+
+    const adminCount = data.admins.filter((a) => {
+      if (!a.registrationDate) return false;
+      const date = new Date(a.registrationDate);
+      return date.toDateString() === d.toDateString();
+    }).length;
+
+    last7Days.push({
+      day: dayName,
+      users: usersCount,
+      subadmins: adminCount,
+    });
+  }
+
+  return last7Days;
+};
+const growthData = getLast7DaysGrowth();
+
   useEffect(() => {
     fetchDashboardData();
   }, [fetchDashboardData]);
@@ -232,18 +266,7 @@ export const DashboardPage = () => {
           <CardContent>
             <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart
-                  data={[
-                    { day: "Mon", users: 5, subadmins: 2 },
-                    { day: "Tue", users: 8, subadmins: 3 },
-                    { day: "Wed", users: 4, subadmins: 1 },
-                    { day: "Thu", users: 10, subadmins: 4 },
-                    { day: "Fri", users: 6, subadmins: 2 },
-                    { day: "Sat", users: 9, subadmins: 3 },
-                    { day: "Sun", users: 7, subadmins: 1 },
-                  ]}
-                  margin={{ top: 20, right: 20, bottom: 10, left: 0 }}
-                >
+                <LineChart data={growthData}>
                    <CartesianGrid strokeDasharray="3 3" stroke="#404040" />
                   <XAxis dataKey="day" stroke="#a0a0a0" />
                   <YAxis stroke="#a0a0a0" />
