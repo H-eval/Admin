@@ -90,7 +90,7 @@ export default function Otp() {
 
     try {
 
-      const res = await fetch("http://localhost:5000/api/admin/request-otp", {
+      const res = await fetch("http://localhost:5001/api/admin/request-otp", {
 
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -168,7 +168,7 @@ export default function Otp() {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/admin/verify-otp", {
+      const res = await fetch("http://localhost:5001/api/admin/verify-otp", {
 
         method: "POST",
         headers: { "Content-Type": "application/json" },
