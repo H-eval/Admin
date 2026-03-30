@@ -5,17 +5,20 @@ import cors from "cors";
 import bcrypt from "bcryptjs";
 import nodemailer from "nodemailer";
 import jwt from "jsonwebtoken";
-import Otp from "./Models/otp.js";
+import Otp from "./models/otp.js";
 import allowedEmails from "./config/allowedEmails.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 
 
 dotenv.config();
-
+const PORT = process.env.PORT || 5000;
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: "*",   // for now (later restrict to frontend URL)
+  credentials: true
+}));
 app.use(express.json());
 
 // ------------------ ROUTES ------------------
@@ -34,14 +37,14 @@ mongoose
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
   port: Number(process.env.EMAIL_PORT),
-  secure: false,
+  secure: process.env.EMAIL_PORT == 465,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
 });
 
-const OTP_EXPIRY = process.env.OTP_EXPIRY_MINUTES || 10;
+ const OTP_EXPIRY = Number(process.env.OTP_EXPIRY_MINUTES) || 10;
 
 // Generate random OTP
 const generateOtp = () => Math.floor(100000 + Math.random() * 900000).toString();
@@ -109,7 +112,11 @@ app.post("/api/admin/verify-otp", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+app.get("/", (req, res) => {
+  res.send("Backend is running 🚀");
+});
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
-app.listen(process.env.PORT || 5000, () =>
-  console.log(`Server running on port ${process.env.PORT || 5000}`)
-);
+ 
