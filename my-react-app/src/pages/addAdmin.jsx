@@ -31,7 +31,7 @@ const SubAdminPage = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const [setVisible] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => setVisible(true), []);

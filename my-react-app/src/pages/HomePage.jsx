@@ -1,13 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import {
   Info,
-  LayoutDashboard,
-  DollarSign,
-  Users,
-  ShoppingCart,
-  Percent,
-  TrendingUp,
-  MoreHorizontal,
+  //LayoutDashboard,
+  Users
 } from "lucide-react";
 import Chart from "chart.js/auto";
 import api from "../api/axiosConfig";
@@ -333,7 +328,7 @@ useEffect(() => {
     },
   });
 
-}, [data, viewType]);  // 🔥 ye bahar nahi, yahi likhna hai
+}, [data, viewType, labels, usersData, adminData]);  // 🔥 ye bahar nahi, yahi likhna hai
 
   
 
