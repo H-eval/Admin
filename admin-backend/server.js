@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 
 app.use(cors({
-  origin: "*",   // for now (later restrict to frontend URL)
+  origin: "https://heval-admin-5c7avwfoe-aaralagrawal7-6583s-projects.vercel.app",   // for now (later restrict to frontend URL)
   credentials: true
 }));
 app.use(express.json());
@@ -34,15 +34,16 @@ mongoose
   .catch((err) => console.error(err));
 
 // Email setup
+
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false, // important for Render
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-  debug: true,
 });
-
 transporter.verify((error, success) => {
   if (error) {
     console.log("EMAIL ERROR:", error);
@@ -56,15 +57,12 @@ transporter.verify((error, success) => {
 // Generate random OTP
 const generateOtp = () => Math.floor(100000 + Math.random() * 900000).toString();
 
-// 1️⃣ Request OTP
 app.post("/api/admin/request-otp", async (req, res) => {
   try {
     let { email } = req.body;
-     email = email.trim().toLowerCase();   // ✅ YAHI ADD KARO
-    console.log("EMAIL RECEIVED:", JSON.stringify(email));
-console.log("ALLOWED EMAILS:", allowedEmails);
+    email = email.trim().toLowerCase();
 
-     if (!allowedEmails.includes(email)) {
+    if (!allowedEmails.includes(email)) {
       return res.status(403).json({ error: "Email not allowed" });
     }
 
@@ -78,14 +76,21 @@ console.log("ALLOWED EMAILS:", allowedEmails);
       { upsert: true, new: true }
     );
 
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: email,
-      subject: "Your OTP for Admin Login",
-      text: `Your OTP is ${otp}. It will expire in ${OTP_EXPIRY} minutes.`,
-    });
+    // ✅ ADD HERE
+    try {
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: email,
+        subject: "Your OTP for Admin Login",
+        text: `Your OTP is ${otp}. It will expire in ${OTP_EXPIRY} minutes.`,
+      });
+    } catch (err) {
+      console.error("MAIL ERROR:", err);
+      return res.status(500).json({ error: "Email failed" });
+    }
 
     res.json({ message: "OTP sent successfully" });
+
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server error" });
