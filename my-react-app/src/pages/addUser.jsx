@@ -40,10 +40,10 @@ const AddUserPage = () => {
 
 const navigate = useNavigate();
   // A simple fade-in animation effect for the form on mount
-  const [setVisible] = useState(false);
-  useEffect(() => {
-    setVisible(true);
-  }, []);
+  // const [setVisible] = useState(false);
+  // useEffect(() => {
+  //   setVisible(true);
+  // }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

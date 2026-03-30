@@ -194,7 +194,6 @@ import {
   Routes,
   Route,
   Navigate,
-  useNavigate,
 } from "react-router-dom";
 
 import Otp from "./pages/otp";
