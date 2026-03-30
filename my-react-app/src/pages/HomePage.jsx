@@ -156,6 +156,11 @@ const handleDelete = async (id) => {
   try {
     const token = localStorage.getItem("token");
 
+    if (!token) {
+      alert("Please login first");
+      return;
+    }
+
     const url =
       activeTab === "users"
         ? `/users/delete-user/${id}`
@@ -252,6 +257,11 @@ useEffect(() => {
   const fetchData = async () => {
     try {
       const token = localStorage.getItem("token");
+
+      if (!token) {
+        console.log("No token found, skipping API call");
+        return;
+      }
 
       const res = await api.get("/admin/dashboard", {
         headers: {
