@@ -130,7 +130,65 @@
 
 // export default AppWrapper;
 
- import React, { useEffect } from "react";
+// import React, { useEffect } from "react";
+// import {
+//   BrowserRouter as Router,
+//   Routes,
+//   Route,
+//   Navigate,
+//   useNavigate,
+// } from "react-router-dom";
+
+// import Otp from "./pages/otp";
+// import HomePage from "./pages/HomePage";
+// import AddUserPage from "./pages/addUser";
+// import SubAdminPage from "./pages/addAdmin";
+
+
+// const AppWrapper = () => (
+//   <Router>
+//     <App />
+//   </Router>
+// );
+
+// const App = () => {
+//   const token = localStorage.getItem("token");
+//   const navigate = useNavigate();
+
+//   // useEffect(() => {
+//   //   if (token) {
+//   //     navigate("/home");   // 🔥 direct HomePage
+//   //   } else {
+//   //     navigate("/otp");
+//   //   }
+//   // }, [token, navigate]);
+
+//   return (
+//     <Routes>
+//       <Route
+//         path="/otp"
+//         element={token ? <Navigate to="/home" /> : <Otp />}
+//       />
+
+//       <Route
+//         path="/home"
+//         element={token ? <HomePage /> : <Navigate to="/otp" />}
+//       />
+
+      
+    
+//     <Route path="/addUser" element={<AddUserPage />} />
+// <Route path="/addAdmin" element={<SubAdminPage />} />
+// <Route path="*" element={<Navigate to="/otp" />} />
+// </Routes>
+//   );
+// };
+
+//export default AppWrapper;
+
+
+
+import React from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -144,7 +202,6 @@ import HomePage from "./pages/HomePage";
 import AddUserPage from "./pages/addUser";
 import SubAdminPage from "./pages/addAdmin";
 
-
 const AppWrapper = () => (
   <Router>
     <App />
@@ -153,15 +210,6 @@ const AppWrapper = () => (
 
 const App = () => {
   const token = localStorage.getItem("token");
-  const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (token) {
-  //     navigate("/home");   // 🔥 direct HomePage
-  //   } else {
-  //     navigate("/otp");
-  //   }
-  // }, [token, navigate]);
 
   return (
     <Routes>
@@ -175,12 +223,21 @@ const App = () => {
         element={token ? <HomePage /> : <Navigate to="/otp" />}
       />
 
-      
-    
-    <Route path="/addUser" element={<AddUserPage />} />
-<Route path="/addAdmin" element={<SubAdminPage />} />
-<Route path="*" element={<Navigate to="/otp" />} />
-</Routes>
+      {/* 🔥 Just protect these (only change) */}
+      <Route
+        path="/addUser"
+        element={token ? <AddUserPage /> : <Navigate to="/otp" />}
+      />
+
+      <Route
+        path="/addAdmin"
+        element={token ? <SubAdminPage /> : <Navigate to="/otp" />}
+      />
+
+      {/* default routes */}
+      <Route path="/" element={<Navigate to="/otp" />} />
+      <Route path="*" element={<Navigate to="/otp" />} />
+    </Routes>
   );
 };
 
