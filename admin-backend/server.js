@@ -40,6 +40,15 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
+  debug: true,
+});
+
+transporter.verify((error, success) => {
+  if (error) {
+    console.log("EMAIL ERROR:", error);
+  } else {
+    console.log("EMAIL SERVER READY ✅");
+  }
 });
 
  const OTP_EXPIRY = Number(process.env.OTP_EXPIRY_MINUTES) || 10;
