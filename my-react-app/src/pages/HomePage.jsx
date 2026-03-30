@@ -7,28 +7,12 @@ import {
   ShoppingCart,
   Percent,
   TrendingUp,
-  TrendingDown,
   MoreHorizontal,
 } from "lucide-react";
 import Chart from "chart.js/auto";
 import api from "../api/axiosConfig";
 import { useNavigate } from "react-router-dom";
 
-
-
-const SimpleAddButton = ({ onClick, text }) => {
-  return (
-    <button
-      onClick={onClick}
-      className="px-4 py-1.5 rounded-lg border border-white/20 text-white text-xs 
-      backdrop-blur-sm bg-white/5 
-      hover:bg-white/10 hover:border-white/40 
-      transition-all duration-300"
-    >
-      + {text}
-    </button>
-  );
-};
 
 const getMonthlyGrowth = (users = [], admins = []) => {
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
@@ -716,64 +700,3 @@ sticky top-0 z-50">
 
 
 
-
-
-function StatCard({ title, value, icon, change, down, onAdd }) {
-  return (
-    <div className="glass rounded-2xl p-6">
-
-      <div className="flex justify-between items-center mb-4">
-
-        <div className="p-3 rounded-xl bg-white/5">
-          {icon}
-        </div>
-
-        {/* 🔥 ADD BUTTON */}
-        
-        {onAdd && (
-  <button
-    onClick={onAdd}
-    className="px-4 py-1.5 rounded-lg border border-blue-400/30 
-    text-blue-300 text-xs 
-    bg-blue-500/10 
-    hover:bg-blue-500/20 hover:text-white 
-    transition-all duration-300"
-  >
-    + {title.includes("User") ? "Add User" : "Add Admin"}
-  </button>
-)}
-      </div>
-
-      <p className="text-sm text-gray-400">{title}</p>
-
-      <p className="text-3xl font-bold">{value}</p>
-
-    </div>
-  );
-}
-
-
-
-function UserRow({ name, email, role }) {
-  return (
-    <tr className="border-b border-white/5 hover:bg-white/5">
-
-      <td className="py-4 px-6">{name}</td>
-
-      <td className="py-4 px-6 text-gray-400">{email}</td>
-
-      <td className="py-4 px-6">{role}</td>
-
-      <td className="py-4 px-6 text-green-400">Active</td>
-
-      <td className="py-4 px-6 text-gray-400">Jan 15, 2024</td>
-
-      <td className="py-4 px-6 text-right">
-        <button>
-          <MoreHorizontal size={16} />
-        </button>
-      </td>
-
-    </tr>
-  );
-}
