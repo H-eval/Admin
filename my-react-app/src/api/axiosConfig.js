@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: `${process.env.REACT_APP_API_URL}/api`, // backend base URL
+  //baseURL: `${process.env.REACT_APP_API_URL}/api`, // backend base URL
+  baseURL: "https://admin-5izt.onrender.com/api",
   timeout: 10000,
 });
 
