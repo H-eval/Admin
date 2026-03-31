@@ -35,13 +35,16 @@ mongoose
 
 // Email setup
 
-const transporter = nodemailer.createTransport({
+ const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
-  secure: false, // important for Render
+  secure: false, // MUST be false for 587
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
+  },
+  tls: {
+    rejectUnauthorized: false,
   },
 });
 transporter.verify((error, success) => {
@@ -75,7 +78,8 @@ app.post("/api/admin/request-otp", async (req, res) => {
       { otpHash, expiresAt, attempts: 0 },
       { upsert: true, new: true }
     );
-
+    console.log("EMAIL_USER:", process.env.EMAIL_USER);
+console.log("EMAIL_PASS:", process.env.EMAIL_PASS ? "EXISTS" : "MISSING");
     // ✅ ADD HERE
     try {
       await transporter.sendMail({
